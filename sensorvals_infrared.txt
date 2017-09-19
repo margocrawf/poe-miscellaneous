@@ -1,0 +1,148 @@
+6 in:
+sensor = 577	 output = -1
+sensor = 576	 output = -1
+sensor = 615	 output = -1
+sensor = 575	 output = -1
+sensor = 577	 output = -1
+sensor = 575	 output = -1
+sensor = 586	 output = -1
+sensor = 574	 output = -1
+sensor = 575	 output = -1
+sensor = 599	 output = -1
+sensor = 578	 output = -1
+sensor = 576	 output = -1
+sensor = 586	 output = -1
+sensor = 576	 output = -1
+sensor = 624	 output = -1
+sensor = 590	 output = -1
+sensor = 577	 output = -1
+sensor = 576	 output = -1
+sensor = 622	 output = -1
+sensor = 578	 output = -1
+sensor = 577	 output = -1
+sensor = 572	 output = -1
+sensor = 602	 output = -1
+sensor = 575	 output = -1
+sensor = 575	 output = -1
+sensor = 575	 output = -1
+sensor = 624	 output = -1
+sensor = 581	 output = -1
+sensor = 578	 output = -1
+sensor = 575	 output = -1
+sensor = 576	 output = -1
+sensor = 575	 output = -1
+sensor = 584	 output = -1
+sensor = 577	 output = -1
+
+12 in:
+sensor = 401	 output = -1
+sensor = 424	 output = -1
+sensor = 392	 output = -1
+sensor = 411	 output = -1
+sensor = 400	 output = -1
+sensor = 410	 output = -1
+sensor = 403	 output = -1
+sensor = 402	 output = -1
+sensor = 400	 output = -1
+sensor = 400	 output = -1
+sensor = 401	 output = -1
+sensor = 439	 output = -1
+sensor = 416	 output = -1
+sensor = 403	 output = -1
+sensor = 392	 output = -1
+sensor = 401	 output = -1
+sensor = 415	 output = -1
+sensor = 400	 output = -1
+sensor = 400	 output = -1
+sensor = 400	 output = -1
+sensor = 400	 output = -1
+sensor = 417	 output = -1
+
+18 in:
+sensor = 281	 output = -1
+sensor = 303	 output = -1
+sensor = 280	 output = -1
+sensor = 282	 output = -1
+sensor = 281	 output = -1
+sensor = 282	 output = -1
+sensor = 323	 output = -1
+sensor = 280	 output = -1
+sensor = 282	 output = -1
+sensor = 281	 output = -1
+sensor = 295	 output = -1
+sensor = 286	 output = -1
+sensor = 326	 output = -1
+sensor = 281	 output = -1
+sensor = 284	 output = -1
+sensor = 281	 output = -1
+sensor = 281	 output = -1
+sensor = 282	 output = -1
+sensor = 281	 output = -1
+sensor = 325	 output = -1
+sensor = 281	 output = -1
+sensor = 281	 output = -1
+sensor = 281	 output = -1
+sensor = 291	 output = -1
+sensor = 281	 output = -1
+sensor = 281	 output = -1
+sensor = 432	 output = -1
+sensor = 548	 output = -1
+
+9 in:
+sensor = 502	 output = -1
+sensor = 502	 output = -1
+sensor = 505	 output = -1
+sensor = 503	 output = -1
+sensor = 501	 output = -1
+sensor = 504	 output = -1
+sensor = 555	 output = -1
+sensor = 502	 output = -1
+sensor = 502	 output = -1
+sensor = 501	 output = -1
+sensor = 504	 output = -1
+sensor = 502	 output = -1
+sensor = 501	 output = -1
+sensor = 502	 output = -1
+sensor = 504	 output = -1
+sensor = 502	 output = -1
+sensor = 501	 output = -1
+sensor = 515	 output = -1
+sensor = 512	 output = -1
+sensor = 503	 output = -1
+sensor = 501	 output = -1
+sensor = 502	 output = -1
+sensor = 505	 output = -1
+sensor = 502	 output = -1
+
+15 in:
+sensor = 339	 output = -1
+sensor = 329	 output = -1
+sensor = 335	 output = -1
+sensor = 332	 output = -1
+sensor = 329	 output = -1
+sensor = 332	 output = -1
+sensor = 329	 output = -1
+sensor = 329	 output = -1
+sensor = 329	 output = -1
+sensor = 328	 output = -1
+sensor = 331	 output = -1
+sensor = 330	 output = -1
+sensor = 330	 output = -1
+sensor = 329	 output = -1
+sensor = 329	 output = -1
+sensor = 359	 output = -1
+sensor = 349	 output = -1
+sensor = 331	 output = -1
+sensor = 330	 output = -1
+sensor = 344	 output = -1
+sensor = 330	 output = -1
+sensor = 329	 output = -1
+
+
+
+
+
+
+
+
+
