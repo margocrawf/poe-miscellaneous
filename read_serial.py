@@ -4,27 +4,33 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import math
 
-ANGLE_MIN = 30
-ANGLE_MAX = 100
+X_ANGLE_MIN = 30 
+X_ANGLE_MAX = 75
+Z_ANGLE_MIN = 60
+Z_ANGLE_MAX = 90
 
 cxn = Serial('/dev/ttyACM0', baudrate=9600)
 
 xs = np.zeros((19*19, 1))
 ys = np.zeros((19*19, 1))
 zs = np.zeros((19*19, 1))
+good_xs = np.zeros((19*19, 1))
+good_ys = np.zeros((19*19, 1))
+good_zs = np.zeros((19*19, 1))
 
 y = 2 # offset in inches, fake data
 
-def convert_to_cartesian(phi, beta, distance):
-    theta = 90 - phi
+def convert_to_cartesian(beta, phi, distance):
+    theta = 180 - phi # the angle from the y axis
     z = y / math.cos(math.radians(theta))
-    print(z)
     x = z*math.sin(math.radians(theta))
     t = distance - x
     l = t*math.sin(math.radians(phi))
-    yPos = z + l
+    yPosPrime = z + l
     xPos = t * math.cos(math.radians(phi))
-    return xPos, yPos, 0
+    yPos = math.cos(math.radians(90-beta))*yPosPrime
+    zPos = math.sin(math.radians(90-beta))*yPosPrime
+    return xPos, yPos, zPos
 
 i = 0
 while True:
@@ -42,23 +48,32 @@ while True:
         #print(angle1, angle2, dist)
         
         x, y, z = convert_to_cartesian(angle1, angle2, dist)
-        xs[i] = x
-        ys[i] = y
-        zs[i] = z
+        if y >= 25 and y <= 45:
+            good_xs[i] = x
+            good_ys[i] = y
+            good_zs[i] = z
+        else:
+            xs[i] = x
+            ys[i] = y
+            zs[i] = z
         i += 1
         print(angle1, angle2, dist, x, y, z)
 
         #X[angle2//10, angle1//10] = dist
-        if angle2 >= ANGLE_MAX and angle1 >= ANGLE_MAX:
+        if angle2 >= Z_ANGLE_MAX and angle1 >= X_ANGLE_MAX:
             #plt.contourf(X)
             #plt.show()
             i = 0
             fig = plt.figure()
             ax = fig.add_subplot(111, projection='3d')
-            ax.scatter(xs, ys, zs)
+            ax.scatter(good_xs, good_ys, good_zs, c='b')
+            #ax.scatter(xs, ys, zs, c='r')
+            ax.set_xlabel("X position")
+            ax.set_ylabel("Y position")
+            ax.set_zlabel("Z position")
             plt.show()
 
-        if angle2 <= ANGLE_MIN and angle1 <= ANGLE_MIN:
+        if angle2 <= Z_ANGLE_MIN and angle1 <= X_ANGLE_MIN:
             i = 0
 
  

@@ -10,11 +10,14 @@ const int analogInPin = A0;  // Analog input pin that the potentiometer is attac
 //const int analogOutPin = 9; // Analog output pin that the LED is attached to
 
 int sensorValue = 0;        // value read from the pot
-int outputValue = 0;        // value output to the PWM (analog out)
-int sensorMin = 1023;
-int sensorMax = 0;
-int posX = 50;
-int posZ = 30;
+int posXinit = 30;
+int posXmax = 75;
+int posZinit = 60;
+int posZmax = 90;
+int posZ = posZinit;
+int posX = posXinit;
+
+int delta = 2; //how much the angles change by each time
 
 int timeOutput = millis();
 
@@ -23,7 +26,8 @@ int timeOutput = millis();
  * which we got using linear regression.
  */
 float dist(int sensorVal) {
-  return -0.0397*sensorVal + 28.93;
+//  return -0.0397*sensorVal + 28.93;
+    return -0.1213*sensorVal + 81.02;
 }
 
 /*
@@ -66,28 +70,28 @@ void setup() {
 }
 
 void loop() {
-  for (posZ = 60; posZ <= 120; posZ += 20) {
+  for (posZ = posZinit; posZ <= posZmax; posZ += 2*delta) {
     //move the servo in the Z direction
     zServo.write(posZ);
-    for (posX = 30; posX <= 100; posX += 10) {
+    for (posX = posXinit; posX <= posXmax; posX += delta) {
         //move the servo
         xServo.write(posX);
         delay(100);
         //get the average distance from 10 sensor readings
-        float distAverage = average_distance_val(10);
+        float distAverage = average_distance_val(5);
         //print to serial
         print_string(distAverage, posX, posZ);
     }
     //move the servo in the Z direction
-    zServo.write(posZ + 10);
-    for (posX = 100; posX >= 30; posX -= 10) {
+    zServo.write(posZ + delta);
+    for (posX = posXmax; posX >= posXinit; posX -= delta) {
         //move the servo
         xServo.write(posX);
         delay(100);
         //get the average distance from 10 sensor readings
-        float distAverage = average_distance_val(10);
+        float distAverage = average_distance_val(5);
         // print the results to the Serial Monitor:
-        print_string(distAverage, posX, posZ + 10);
+        print_string(distAverage, posX, posZ + delta);
     }
   }
 
