@@ -21,13 +21,15 @@ good_zs = np.zeros((19*19, 1))
 y = 2 # offset in inches, fake data
 
 def convert_to_cartesian(beta, phi, distance):
-    theta = 180 - phi # the angle from the y axis
-    z = y / math.cos(math.radians(theta))
-    x = z*math.sin(math.radians(theta))
-    t = distance - x
-    l = t*math.sin(math.radians(phi))
-    yPosPrime = z + l
-    xPos = t * math.cos(math.radians(phi))
+    theta = 90 - phi # the angle from the y axis
+    #z = y / math.cos(math.radians(theta))
+    #x = z*math.sin(math.radians(theta))
+    #t = distance - x
+    #l = t*math.sin(math.radians(phi))
+    #yPosPrime = z + l
+    #xPos = t * math.cos(math.radians(phi))
+    yPosPrime = distance * math.cos(math.radians(phi))
+    xPos = distance * math.sin(math.radians(phi))
     yPos = math.cos(math.radians(90-beta))*yPosPrime
     zPos = math.sin(math.radians(90-beta))*yPosPrime
     return xPos, yPos, zPos
@@ -67,7 +69,7 @@ while True:
             fig = plt.figure()
             ax = fig.add_subplot(111, projection='3d')
             ax.scatter(good_xs, good_ys, good_zs, c='b')
-            #ax.scatter(xs, ys, zs, c='r')
+            ax.scatter(xs, ys, zs, c='r')
             ax.set_xlabel("X position")
             ax.set_ylabel("Y position")
             ax.set_zlabel("Z position")
