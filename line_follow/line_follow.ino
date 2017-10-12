@@ -1,21 +1,19 @@
 #include <Wire.h>
 #include <Adafruit_MotorShield.h>
 #include "utility/Adafruit_MS_PWMServoDriver.h"
-
+//create the motor objects
 Adafruit_MotorShield AFMS = Adafruit_MotorShield(); 
-Adafruit_DCMotor *myMotorRight = AFMS.getMotor(1);
-Adafruit_DCMotor *myMotorLeft = AFMS.getMotor(2);
+Adafruit_DCMotor *myMotorRight = AFMS.getMotor(1); //right motor
+Adafruit_DCMotor *myMotorLeft = AFMS.getMotor(2); //left motor
 // pins:
 const int analogrightPin = A0;  // Analog right pin 
 const int analogleftPin = A1; // Analog left pin
-
+// sensor values
 int sensorValueright = 0; // value read from the right pot
 int sensorValueleft = 0; // value read from the left pot
-int threshold = 20;
-
-int TERMINAL_CHAR = 59; //ascii value of ;
-
-int motorSpeed; //speed of the motor
+// calibrated values
+int threshold = 30; // base threshold value
+int motorSpeed = 40; // speed of the motor
 
 /*
  * Setup
@@ -25,8 +23,8 @@ void setup() {
   Serial.begin(9600);
   Serial.flush();
   AFMS.begin();
-  myMotorRight->setSpeed(255);
-  myMotorLeft->setSpeed(255);
+  myMotorRight->setSpeed(motorSpeed);
+  myMotorLeft->setSpeed(motorSpeed);
 }
 
 /*
@@ -35,18 +33,26 @@ void setup() {
  * "variable_name=value;"
  */
 void assign_var(String inputString) {
-//  // first part of string, before equal sign
-//   char* varName = strtok(inputString.c_str(), "=");
-//   Serial.println(varName);
-//   // if you're assigning motorSpeed
-//   if (strcmp(varName, "motorSpeed") == 0) {
-//      // get the thing on other side of equal sign
-//      char* val = strtok(NULL, ";");
-//      Serial.print("Changing motor speed to ");
-//      Serial.println(val);
-//      //assign the value
-//      motorSpeed = atoi(val);
-//   }
+  // first part of string, before equal sign
+   char* varName = strtok(inputString.c_str(), "=");
+   Serial.println(varName);
+   // if you're assigning motorSpeed
+   if (strcmp(varName, "motorSpeed") == 0) {
+      // get the thing on other side of equal sign
+      char* val = strtok(NULL, ";");
+      Serial.print("Changing motor speed to ");
+      Serial.println(val);
+      //assign the value
+      motorSpeed = atoi(val);
+   }
+   else if (strcmp(varName, "threshold") == 0) {
+      //get the thing on other side of equal sign
+      char* val = strtok(NULL, ";");
+      Serial.print("Changing threshold value to ");
+      Serial.println(val);
+      //assign the value
+      threshold = atoi(val);
+   }
 }
 
 /*
@@ -55,15 +61,15 @@ void assign_var(String inputString) {
  */
 void move_motor(int sensorValueright, int sensorValueleft) {
   if ((sensorValueright - sensorValueleft) > threshold){
-    myMotorRight->setSpeed(0);
-    myMotorLeft->setSpeed(255);
+    myMotorLeft->setSpeed(0);
+    myMotorRight->setSpeed(motorSpeed);
   }
   else if ((sensorValueright - sensorValueleft) < -threshold){
-    myMotorRight->setSpeed(255);
-    myMotorLeft->setSpeed(0);
+    myMotorLeft->setSpeed(motorSpeed);
+    myMotorRight->setSpeed(0);
   } else {
-    myMotorRight->setSpeed(255);
-    myMotorLeft->setSpeed(255);
+    myMotorRight->setSpeed(motorSpeed);
+    myMotorLeft->setSpeed(motorSpeed);
   }
   
   return;
@@ -73,7 +79,7 @@ void move_motor(int sensorValueright, int sensorValueleft) {
  * Loop 5evr
  */
 void loop() {
-  // read the analog in value
+  // read the analog in values
   sensorValueleft = analogRead(analogleftPin);
   sensorValueright = analogRead(analogrightPin);
   Serial.println(sensorValueleft);
@@ -89,9 +95,9 @@ void loop() {
      
   }
   Serial.flush();
-  delay(100);
-  for (int i = 0; i < 100; i++){
+  delay(50);
+//  for (int i = 0; i < 100; i++){
     myMotorRight->run(FORWARD);
     myMotorLeft->run(FORWARD);
-  }
+//  }
 }
